@@ -36,7 +36,7 @@ $ mysql -u user_name - p your_password;
 $ mysql -u `your_name` -p movies < MoviesApp/database/movies.sql
 ```
 
-Finally you can run the app using PHP Built-in web server:
+Finally you can run the app using PHP Built-in web server. Just type this link http://localhost:8000/index.php in your browser's url field after running the next command:
 ```sh 
 $ php -S localhost:8000 -t MoviesApp/
 ```
