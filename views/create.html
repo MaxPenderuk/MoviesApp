@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title> Movies - Add </title>
+    <link   href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+      <div class="col-sm-6 center-block" style="float: none;">
+        <div class="row" style="margin-top: 1%;">
+          <div class="well text-center"><h2 style="margin-top: 10px;">Add a new movie</h2></div>
+        </div>
+      <form class="form-horizontal" action="create.php" method="post">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Title</label>
+          <div class="col-sm-10 {{ (errorsList.nameError is not empty) ? 'has-error' : '' }}">
+            <input name="name" class="form-control" type="text" aria-describedby="errorBlock1"  placeholder="Title">
+            {% if errorsList.nameError is not empty %}
+                <span id="errorBlock3" class="help-block">{{ errorsList.nameError }}</span>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Release</label>
+          <div class="col-sm-10 {{ (errorsList.dateError is not empty) ? 'has-error' : '' }}">
+            <input name="release_date" class="form-control" type="text" aria-describedby="errorBlock2" placeholder="Release date">
+                {% if errorsList.dateError is not empty %}
+                    <span id="errorBlock2" class="help-block">{{ errorsList.dateError }}</span>
+                {% endif %}
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Format</label>
+          <div class="col-sm-10">
+            <select class="form-control" name="format">
+                {% for format in formatsList %}
+                    <option value="{{ format.id }}"> {{ format.name }} </option>
+                {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-panel text-right">Actors</label>
+          <div class="col-sm-5 {{ (errorsList.actorFirstNameError is not empty) ? 'has-error' : '' }}">
+            <input name="actors[0][first_name]" class="form-control" type="text" aria-describedby="errorBlock3" placeholder="Actor's first name">
+                {% if errorsList.actorFirstNameError is not empty %}
+                    <span id="errorBlock3" class="help-block">{{ errorsList.actorFirstNameError }}</span>
+                {% endif %}
+          </div>
+          <div class="col-sm-5 {{ (errorsList.actorLastNameError is not empty) ? 'has-error' : '' }}">
+            <input name="actors[0][last_name]" class="form-control" type="text" aria-describedby="errorBlock4" placeholder="Actor's last name">
+                {% if errorsList.actorLastNameError is not empty %}
+                    <span id="errorBlock4" class="help-block">{{ errorsList.actorLastNameError }}</span>
+                {% endif %}
+          </div>
+        </div>
+        <div id="new-actor" class="form-group">
+            <div class="col-sm-12 text-right">
+                <button id="act-add" type="button" class="btn btn-primary">Add an actor</button>
+            </div>
+        </div>
+        <div class="btn-group btn-group-justified">
+          <div class="btn-group" role="group">
+            <button type="submit" class="btn btn-success">Create</button>
+          </div>
+          <div class="btn-group" role="group">
+            <a class="btn btn-default" type="button" href="index.php">Back</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div> <!-- /container -->
+  <script src="js/jquery-3.1.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      var actorsCnt = 0;
+      $('#new-actor #act-add').on('click', function() {
+        actorsCnt = actorsCnt + 1;
+        var newActorBlock =
+        '<div class="form-group">' +
+          '<div class="col-sm-2"></div>' +
+          '<div class="col-sm-5">' +
+              '<input name="actors[' + actorsCnt + '][first_name]" class="form-control" type="text" placeholder="First name">' +
+          '</div>' +
+          '<div class="col-sm-5">' +
+              '<input name="actors[' + actorsCnt + '][last_name]" class="form-control" type="text" placeholder="Last name">' +
+          '</div>' +
+        '</div>';
+        $(newActorBlock).insertBefore('#new-actor');
+      });
+    });
+  </script>
+  </body>
+</html>

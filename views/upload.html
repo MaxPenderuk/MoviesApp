@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Movies - Upload</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/sweetalert.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+      <div class="row">
+          <div class="col-sm-6 text-center center-block" style="float: none; margin-top: 1%;">
+              <div class="well text-center"><h2 style="margin-top: 10px;">Movies uploading</h2></div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 center-block" style="float: none;">
+            <form class="well" action="upload.php" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="file">Select a file to upload</label>
+                    <input type="file" name="file" />
+                    <p class="help-block">Only txt file with maximum size of 1MB allowed.</p>
+                </div>
+                <button class="btn btn-lg btn-primary" type="submit">Upload</button>
+                <a href="index.php" class="btn btn-lg btn-default" type="button">Back</a>
+            </form>
+        </div>
+      </div>
+      <div class="row">
+        {% if scanRes|length > 0 %}
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>File name</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for result in scanRes %}
+                    <tr>
+                      <td>{{ result }}</td>
+                      <td>
+                        <a class="btn btn-primary" href="upload_to_db.php?name={{ result }}">Upload to DB</a>
+                        <a class="btn btn-danger" href="remove.php?name={{ result }}">Delete</a>
+                      </td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        {% endif %}
+      </div>
+  </div> <!-- /container -->
+  <script src="js/jquery-3.1.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/sweetalert.min.js"></script>
+  </body>
+</html>
