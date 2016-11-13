@@ -11,11 +11,11 @@ MoviesApp is a web application that stores information about movies. This app wa
 * upload_to_db.php - adds data from a certain .txt file with movies information into DB 
 
 ### Installation
-You can download this app manually as .zip file or clone it using command line.
+You can download this app manually as a .zip file or clone it using command line.
 ```sh
 $ git clone https://github.com/MaxPenderuk/MoviesApp.git
 ```
-> Before running MoviesApp you have to import its `/MoviesApp/database/movies.sql` into your MySQL, and also you have to change `$dbUsername` and `$dbUserPassword` values in `MoviesApp/database.php` file. To import `.sql` file into MySQL follow the next steps. 
+> Before running the MoviesApp you have to import its `/MoviesApp/database/movies.sql` into your MySQL, and also you have to change `$dbUsername` and `$dbUserPassword` values in `MoviesApp/database.php` file. To import `.sql` file into MySQL follow the next steps. 
 
 ```sh
 $ mysql -u user_name - p your_password;
