@@ -2,6 +2,16 @@
 
 MoviesApp is a web application that stores information about movies. This app was created using PHP(without frameworks), jQuery, Bootstrap. Also I've used Twig template engine to get rid of `php` code in `html` files stored in `MoviesApp/views` folder. 
 
+### Structure
+* `css/` - contains .css files
+* `database/` - contains `movies.sql` file, which has to be imported into MySQL before starting MoviesApp
+* `fonts/` - contains fonts for Bootstrap
+* `js/` - contains .js files
+* `uploads/` - containts `.txt` files uploaded through UI for further import into DB
+* `vendor/` - contains Composer and Twig files
+* `views/` - contains html files for rendering via server side `.php` scrips
+
+
 ### Server side
 * database.php - establishes connection with MySQL `movies` database
 * index.php - grabs movies data from DB
