@@ -13,14 +13,14 @@ MoviesApp is a web application that stores information about movies. This app wa
 
 
 ### Server side
-* database.php - establishes connection with MySQL `movies` database
-* index.php - grabs movies data from DB
-* create.php - creates a new movie
-* read.php - shows information about a certain movie
-* delete.php - deletes a certain movie from the database
-* upload.php - uploads into an app a txt file with movies information
-* remove.php - deletes a txt file with movies information from an app
-* upload_to_db.php - adds data from a certain .txt file with movies information into DB 
+* `database.php` - establishes connection with MySQL `movies` database
+* `index.php` - grabs movies data from DB
+* `create.php` - creates a new movie
+* `read.php` - shows information about a certain movie
+* `delete.php` - deletes a certain movie from the database
+* `upload.php` - uploads into an app a txt file with movies information
+* `remove.php` - deletes a txt file with movies information from an app
+* `upload_to_db.php` - adds data from a certain .txt file with movies information into DB 
 
 ### Installation
 You can download this app manually as a .zip file or clone it using command line.
