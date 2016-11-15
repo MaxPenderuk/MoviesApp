@@ -46,12 +46,28 @@
       $dateError = 'Enter the movie release date';
       $is_valid = false;
     } else {
-      if (intval($releaseDate) === 0 || strlen($releaseDate) !== 4) {
+      $year = intval($releaseDate);
+      if ($year === 0 || strlen($releaseDate) !== 4) {
           $dateError = 'Enter a four digit year';
           $is_valid = false;
       }
+      if ($year < 1900 || $year > intval(date("Y"))) {
+        $dateError = 'The `year` value has to be not less than 1900 and not bigger than current year!';
+        $is_valid = false;
+      }
     }
     if (!empty($actorFirstNameError) || !empty($actorLastNameError)) {
+      $is_valid = false;
+    }
+    $sort = null;
+    if (preg_match('/^[0-9]+$/', $name)) {
+      $sort = 0;
+    } else if (preg_match('/^[a-zA-Z0-9\s\-]+$/', $name)) {
+      $sort = 1;
+    } else if (preg_match('/^[\p{Cyrillic}0-9\s\-]+$/u', $name)) {
+      $sort = 2;
+    } else {
+      $nameError = "Only English, Ukrainian and Russian names are allowed!";
       $is_valid = false;
     }
 
@@ -66,9 +82,9 @@
     // if it was no errors flush data into DB
     if ($is_valid) {
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $sql = "INSERT INTO movie (name, release_date, format_id) values(?, ?, ?)";
+      $sql = "INSERT INTO movie (name, release_date, format_id, sort) values(?, ?, ?, ?)";
       $query = $pdo->prepare($sql);
-      $query->execute([$name, $releaseDate, $format]);
+      $query->execute([$name, $releaseDate, $format, $sort]);
       $lastMovieID = $pdo->lastInsertId();
 
       foreach ($actorsArr as $actor) {

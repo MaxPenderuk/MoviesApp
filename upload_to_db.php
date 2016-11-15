@@ -8,6 +8,20 @@ ini_set('auto_detect_line_endings', true);
 $fileName = $_GET['name'];
 $filePath = 'uploads/' . $fileName;
 
+function checkMovieTitle($movieName) {
+  $letter = $movieName[0];
+  if (preg_match('/^[0-9]+$/', $name)) {
+    $sort = 0;
+  } else if (preg_match('/^[a-zA-Z0-9\s\-]+$/', $name)) {
+    $sort = 1;
+  } else if (preg_match('/^[\p{Cyrillic}0-9\s\-]+$/u', $name)) {
+    $sort = 2;
+  } else {
+    $sort = 3;
+  }
+  return $sort;
+}
+
 if (file_exists($filePath)) {
   // read the file into an array
   $file = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -21,7 +35,7 @@ if (file_exists($filePath)) {
     3 => 'Blu-Ray'
   ];
 
-  $sql = "INSERT INTO movie (name, release_date, format_id) values(?, ?, ?)";
+  $sql = "INSERT INTO movie (name, release_date, format_id, sort) values(?, ?, ?, ?)";
   $query = $pdo->prepare($sql);
 
   // for rows counting
@@ -30,9 +44,16 @@ if (file_exists($filePath)) {
     $movieInfo[] = explode(': ', $file[$i]);
     $cnt++;
     if ($cnt == 4) {
+      $sort = 0;
+      $movieTitleResp = checkMovieTitle($movieInfo[0][1]);
+      if($movieTitleResp !== 3) {
+        $sort = $movieTitleResp;
+      } else {
+        throw new Exception('Only English, Ukrainian and Russian names are allowed!');
+      }
       // format name to index in format DB table
       $movieInfo[2][1] = array_search($movieInfo[2][1], $formats);
-      $query->execute([$movieInfo[0][1], $movieInfo[1][1], $movieInfo[2][1]]);
+      $query->execute([$movieInfo[0][1], $movieInfo[1][1], $movieInfo[2][1], $sort]);
       $lastMovieID = $pdo->lastInsertId();
 
       $actorsArr = explode(', ', $movieInfo[3][1]);
