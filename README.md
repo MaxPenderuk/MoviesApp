@@ -8,7 +8,6 @@ MoviesApp is a web application that stores information about movies. This app wa
 * `fonts/` - contains fonts for Bootstrap
 * `js/` - contains .js files
 * `uploads/` - containts `.txt` files uploaded through UI for further import into DB
-* `vendor/` - contains Composer and Twig files
 * `views/` - contains html files for rendering via server side `.php` scrips
 
 
@@ -28,7 +27,7 @@ You can download this app manually as a .zip file or clone it using command line
 $ git clone https://github.com/MaxPenderuk/MoviesApp.git
 ```
 Before running the MoviesApp you have to:
-* install Twig using Composer `$ composer require "twig/twig"`
+* install Twig using Composer `$ composer require twig/twig`
 * import its `/MoviesApp/database/movies.sql` into your MySQL 
 * change the configuration of the access to the local DB (`$dbUsername` and `$dbUserPassword` values in `MoviesApp/database.php` file) 
 
