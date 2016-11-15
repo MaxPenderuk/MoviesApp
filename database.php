@@ -4,7 +4,7 @@ class Database {
   private static $dbName = 'movies';
   private static $dbHost = 'localhost';
   private static $dbUsername = 'root';
-  private static $dbUserPassword = 'collateraldamage1995s';
+  private static $dbUserPassword = '';
   private static $conf = null;
 
   public function __construct() {
