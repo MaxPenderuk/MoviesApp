@@ -9,12 +9,11 @@ $fileName = $_GET['name'];
 $filePath = 'uploads/' . $fileName;
 
 function checkMovieTitle($movieName) {
-  $letter = $movieName[0];
-  if (preg_match('/^[0-9]+$/', $name)) {
+  if (preg_match('/^[0-9\s\-\:,.:?$]+$/', $movieName)) {
     $sort = 0;
-  } else if (preg_match('/^[a-zA-Z0-9\s\-]+$/', $name)) {
+  } else if (preg_match('/^[a-zA-Z0-9\s\-\:,.:?$]+$/', $movieName)) {
     $sort = 1;
-  } else if (preg_match('/^[\p{Cyrillic}0-9\s\-]+$/u', $name)) {
+  } else if (preg_match('/^[\p{Cyrillic}0-9\s\-\:,.:?$]+$/u', $movieName)) {
     $sort = 2;
   } else {
     $sort = 3;
@@ -49,12 +48,13 @@ if (file_exists($filePath)) {
       if($movieTitleResp !== 3) {
         $sort = $movieTitleResp;
       } else {
-        throw new Exception('Only English, Ukrainian and Russian names are allowed!');
+        throw new Exception('Only English, Ukrainian and Russian names are allowed without special symbols!');
       }
       // format name to index in format DB table
       $movieInfo[2][1] = array_search($movieInfo[2][1], $formats);
       $query->execute([$movieInfo[0][1], $movieInfo[1][1], $movieInfo[2][1], $sort]);
       $lastMovieID = $pdo->lastInsertId();
+
 
       $actorsArr = explode(', ', $movieInfo[3][1]);
       $sql = [];

@@ -60,14 +60,14 @@
       $is_valid = false;
     }
     $sort = null;
-    if (preg_match('/^[0-9]+$/', $name)) {
+    if (preg_match('/^[0-9\s\-\:,.:?$]+$/', $name)) {
       $sort = 0;
-    } else if (preg_match('/^[a-zA-Z0-9\s\-]+$/', $name)) {
+    } else if (preg_match('/^[a-zA-Z0-9\s\-\:,.:?$]+$/', $name)) {
       $sort = 1;
-    } else if (preg_match('/^[\p{Cyrillic}0-9\s\-]+$/u', $name)) {
+    } else if (preg_match('/^[\p{Cyrillic}0-9\s\-\:,.:?$]+$/u', $name)) {
       $sort = 2;
     } else {
-      $nameError = "Only English, Ukrainian and Russian names are allowed!";
+      $nameError = "Only English, Ukrainian and Russian names are allowed without special symbols!";
       $is_valid = false;
     }
 
