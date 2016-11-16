@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: movies
 -- ------------------------------------------------------
--- Server version	5.6.27
+-- Server version 5.6.27
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,7 +30,7 @@ CREATE TABLE `actor` (
   PRIMARY KEY (`id`),
   KEY `movie_id` (`movie_id`),
   CONSTRAINT `actor_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,6 @@ CREATE TABLE `actor` (
 
 LOCK TABLES `actor` WRITE;
 /*!40000 ALTER TABLE `actor` DISABLE KEYS */;
-INSERT INTO `actor` VALUES (1,'Will','Smith',1),(2,'Alice','Braga',1),(3,'Charlie','Tahan',1);
 /*!40000 ALTER TABLE `actor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,12 +76,13 @@ DROP TABLE IF EXISTS `movie`;
 CREATE TABLE `movie` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  `release_date` year(4) NOT NULL,
+  `release_date` int(4) DEFAULT NULL,
   `format_id` int(11) DEFAULT NULL,
+  `sort` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `format_id` (`format_id`),
   CONSTRAINT `movie_ibfk_1` FOREIGN KEY (`format_id`) REFERENCES `format` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +91,6 @@ CREATE TABLE `movie` (
 
 LOCK TABLES `movie` WRITE;
 /*!40000 ALTER TABLE `movie` DISABLE KEYS */;
-INSERT INTO `movie` VALUES (1,'I Am Legend',2007,3);
 /*!40000 ALTER TABLE `movie` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -104,4 +103,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-13 14:44:42
+-- Dump completed on 2016-11-16 14:33:47
