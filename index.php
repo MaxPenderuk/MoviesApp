@@ -10,7 +10,7 @@ $pdo = Database::connect();
 
 //if sort button was clicked - sort movie list by name, otherwise - not
 $sql = (empty($_GET['sort'])) ? "SELECT * FROM movie ORDER BY id DESC" :
-       "SELECT * FROM movie ORDER BY sort, name";
+       "SELECT * FROM movie ORDER BY sort, name collate utf8_unicode_ci";
 
 //search by movie title or actoe's name
 if (!empty($_POST['search_by']) && !empty($_POST['search_param'])) {
